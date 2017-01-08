@@ -1,0 +1,62 @@
+#set($layout = "layout/null.vm")
+<!DOCTYPE html>
+<html>
+<head>
+    <title>活动详情</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    #parse("/common/import.v2.0.vm")
+</head>
+<body>
+<div id="dashboard" class="db common-page">
+    <div style="border:#e6e6e6 1px solid; background-color:#fff" class="p20 m10 pt30">
+      <!--添加门店页面 -->
+      <div id="creatStep_1">#parse("/business/appyMerchandise/addStore.vm")</div>
+      <!--添加门店页面结束 -->
+
+      <!--添加商品页面 -->
+      <div id="creatStep_2" style="display: none;">#parse("/business/addCommodities.vm")</div>
+      <!--添加商品页面结束 -->
+
+      <!--确认提交页面 -->
+      <div id="creatStep_3" style="display: none;">#parse("/business/complete.vm")</div>
+      <!--确认提交页面结束 -->
+
+    </div>
+</div>
+<script>
+//    var formData={
+//        "promotionName":"",  //活动名称
+//        "promotionWay":"0",   //参与方式
+//        "display":"",
+//        "promotionStartTime" :"",//活动开始时间
+//        "promotionEndTime" :"",//活动结束时间
+//        "limit_ladder":[],     //满减
+//        "is_limit_station":"2", //注：是否限制门店:  0:全选；1限制
+//        "is_ignore_conflict":"1",//注：是否忽略冲突：0:不忽略；1忽略
+//        "limit_station":[],      //已选门店
+//        "limit_sku":[]           //已选商品
+//    };
+//    //点击“添加门店”按钮时弹出框中所有门店数据
+//    var allStoreData = {};
+//    //已添加了的门店数据
+//    var rootData = {"total": 0,"rows":[]};
+////    var rootData ={"total": 13,"rows":[{"activityName":"已添加门店生鲜直降1","storeId":"20150925","merchantStoreId":"20151025"},{"activityName":"生鲜直降2","storeId":"20150926","merchantStoreId":"20151026"},{"activityName":"生鲜直降3","storeId":"20150927","merchantStoreId":"20151027"},{"activityName":"生鲜直降4","storeId":"20150928","merchantStoreId":"20151028"},{"activityName":"生鲜直降5","storeId":"20150929","merchantStoreId":"20151029"},{"activityName":"生鲜直降6","storeId":"20150925","merchantStoreId":"20151025"},{"activityName":"生鲜直降7","storeId":"20150925","merchantStoreId":"20151025"},{"activityName":"生鲜直降8","storeId":"20150925","merchantStoreId":"20151025"},{"activityName":"生鲜直降9","storeId":"20150925","merchantStoreId":"20151025"},{"activityName":"生鲜直降10","storeId":"20150925","merchantStoreId":"20151025"},{"activityName":"生鲜直降11","storeId":"20150925","merchantStoreId":"20151025"},{"activityName":"生鲜直降12","storeId":"20150925","merchantStoreId":"20151025"},{"activityName":"生鲜直降13","storeId":"20160606","merchantStoreId":"20161111"}]};
+//
+//    //点击“添加商品”按钮时弹出框中所有门店数据
+//    var allCommoditiesData = {};
+//    //已添加了的门店数据
+//    var hasCommoditiesData = {"total": 0,"rows":[]};
+////    var hasCommoditiesData ={"total": 13,"rows":[{"activityName":"已添加商品生鲜直降1","storeId":"20150925","merchantStoreId":"20151025"},{"activityName":"生鲜直降2","storeId":"20150926","merchantStoreId":"20151026"},{"activityName":"生鲜直降3","storeId":"20150927","merchantStoreId":"20151027"},{"activityName":"生鲜直降4","storeId":"20150928","merchantStoreId":"20151028"},{"activityName":"生鲜直降5","storeId":"20150929","merchantStoreId":"20151029"},{"activityName":"生鲜直降6","storeId":"20150925","merchantStoreId":"20151025"},{"activityName":"生鲜直降7","storeId":"20150925","merchantStoreId":"20151025"},{"activityName":"生鲜直降8","storeId":"20150925","merchantStoreId":"20151025"},{"activityName":"生鲜直降9","storeId":"20150925","merchantStoreId":"20151025"},{"activityName":"生鲜直降10","storeId":"20150925","merchantStoreId":"20151025"},{"activityName":"生鲜直降11","storeId":"20150925","merchantStoreId":"20151025"},{"activityName":"生鲜直降12","storeId":"20150925","merchantStoreId":"20151025"},{"activityName":"生鲜直降13","storeId":"20160606","merchantStoreId":"20161111"}]};
+//
+//
+//    var refDataGrid = null;
+//    var refDataGrid2 = null;
+//    var dialogData = null;
+//    var dialogDataFailure=null;
+//    var allStoreData_succ = null;
+//    seajs.use(['scripts/merchantDiscount/createMerchantDiscount.js']);
+//    seajs.use(['scripts/merchantDiscount/addCommodities.js']);
+    seajs.use(['/static/js/business/merchReported/complete.js']);
+</script>
+</body>
+</html>

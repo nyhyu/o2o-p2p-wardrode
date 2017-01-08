@@ -1,0 +1,48 @@
+#set($layout = "layout/null.vm")
+<!--批量操作-->
+##<div class="tool mt30 mb10">
+##    <label class="mr10 ml10"><input class="check-all" data-target="list" type="checkbox"> 全选</label>
+##    <input class="button bg-blue allback" type="button" value="批量确认退回">
+##</div>
+<!--批量操作结束-->
+    <!--列表-->
+    <table class="check-container">
+        <thead>
+        <tr>
+            <th><label class="mr10 ml10"><input class="check-all" data-target="list" type="checkbox"> 全选</label></th>
+            <th>门店名称</th>
+            <th>门店编号</th>
+            <th>商家门店编号</th>
+        </tr>
+        </thead>
+
+        <tbody data-container="list">
+        #foreach($list in $!storeList)
+            <tr>
+                <td><input type="checkbox" value="$!{list.stationNo}" name="orderId" class="check"></td>
+                <td>$!{list.stationName}</td>
+                <td>$!{list.stationNo}</td>
+                <td>$!{list.outSystemId}</td>
+            </tr>
+        #end
+        </tbody>
+    </table>
+    <!--列表结束-->
+
+    <!--翻页开始-->
+    <div class="page tr mt10">#pageTag("searchStorePage", "",$!page, $!params)</div>
+    <!--翻页结束-->
+<script>
+    seajs.use('jquery',function($){
+        $(function(){
+            //返填
+            var rows = $("#creatStep_1 .table tbody tr");
+            rows.each(function(){
+                var staCode= $(this).find("td").eq(2).text();
+                if(stationCodeArr.length>0 && $.inArray(staCode,stationCodeArr)>=0){
+                    $(this).find("td input[type=checkbox]").attr("checked", true);
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,29 @@
+#set($layout = "layout/null.vm")
+#set($iversion = "2015615")
+#set($itheme = "ui")
+#set($webRootPath = "#springUrl('')")
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="kiben" content="no-cache" />
+<link rel="stylesheet" href="#springUrl('')/static/style/common/base.v2.0.css?v=$!{iversion}">
+<link rel="stylesheet" href="#springUrl('')/static/style/common/block.v2.0.css?v=$!{iversion}">
+<link rel="stylesheet" href="#springUrl('')/static/style/common/iconfont.css?v=$!{iversion}">
+<script>var webRootPath = "$webRootPath";</script>
+<script src="#springUrl('')/static/js/sea/sea.js?v=$!{iversion}"></script>
+<script>
+    seajs.use(['jquery'], function($){
+        $(window).scroll(function(){
+            if ($(window).scrollTop() > 10) {
+                if ($(".rtop").size()) {
+                    $(".rtop").show();
+                } else {
+                    $("body").append('<a class="rtop iconfont" href="#@"></a>');
+                }
+            } else {
+                $(".rtop").hide();
+            }
+        });
+        $(".rtop").die().live("click", function(){
+            $("body,html").animate({scrollTop:0},300);
+        });
+    });
+</script>

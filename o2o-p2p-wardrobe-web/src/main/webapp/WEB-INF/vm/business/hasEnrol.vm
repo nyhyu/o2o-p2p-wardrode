@@ -1,0 +1,46 @@
+#set($layout = "layout/null.vm")
+
+<!--列表-->
+<div class="table">
+    <table class="check-container" data-container="list">
+        <thead>
+            <tr>
+                <th>活动名称</th>
+                <th>活动时间</th>
+                <th>活动状态</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        #foreach($li in $!list)
+            <tr>
+                <td>
+                    <a data-value="$!{li.id}" href="/planning/detailPage?planingId=$!{li.id}">$!{li.planingName}</a>
+                </td>
+                <td>$!dateFormatUtils.format($!{li.planingBeginTime},"yyyy-MM-dd HH:mm:ss")~ $!dateFormatUtils.format($!{li.planingEndTime},"yyyy-MM-dd HH:mm:ss")</td>
+                <td>
+                    #if($!{li.planingState}==1)
+                        未报名
+                    #else
+                        可报名
+                    #end
+                </td>
+                <td>
+                    <a class="enrolAct_has" data-value="$!{li.planingCode}" href="javascript:void(0);">活动报名</a>
+                </td>
+            </tr>
+        #end
+        </tbody>
+    </table>
+</div>
+<!--列表结束-->
+
+<!--翻页开始-->
+<div class="style-red mt10">
+    <div class="page tr">
+    #set($pageUrl = "#springUrl('')")
+    #pageTag($pageUrl, "", $!{page}, $!{params})
+    </div>
+</div>
+<!--翻页结束-->

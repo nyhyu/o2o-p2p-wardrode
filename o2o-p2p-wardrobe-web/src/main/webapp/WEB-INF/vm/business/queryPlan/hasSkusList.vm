@@ -1,0 +1,94 @@
+#set($layout = "layout/null.vm")
+
+<!--列表-->
+<div class="table">
+    <table class="check-container" data-container="list">
+        <thead>
+        <tr>
+            <th>门店信息</th>
+            <th>提报商品</th>
+            <th>原价</th>
+            <th>抢购价</th>
+            <th>抢购数量</th>
+            <th>限购数量</th>
+            <th>审核状态</th>
+            <th>促销状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            #foreach($li in $!{planSkuList})
+            <tr>
+                <td>
+                    <a class="skuId_station_lspweb" data-skuId="$!{li.skuId}" data-venderCode="$!{li.venderCode}"
+                       data-promotion="$!{li.promotionState}"
+                       href="javascript:void(0);">$!{li.stationNum}</a>
+                </td>
+                <td>
+                    $!{li.skuName}
+                    #if($!{li.skuName})
+                        <br>
+                    #end
+                    $!{li.skuId}
+                </td>
+                <td>
+                    $!{li.stationPriceB}
+                </td>
+                <td>
+                    #if($!{li.cmsType}==2||$!{li.cmsType}==4)
+                        $!{li.promotionPriceB}
+                    #else
+                        (无)非促销
+                    #end
+                </td>
+                <td>
+                    #if($!{li.cmsType}==2||$!{li.cmsType}==4)
+                        $!{li.size}
+                    #else
+                        (无)非促销
+                    #end
+                </td>
+                <td>
+                    #if($!{li.cmsType}==2||$!{li.cmsType}==4)
+                        $!{li.limitSize}
+                    #else
+                        (无)非促销
+                    #end
+                </td>
+                <td>
+                    #if($!{noPlanReviewState}==$!{li.reviewState})
+                    <a class="browse_reason" href="javascript:void(0);">
+                    #end
+                    <input type="hidden" name="skuId_AClass_TD" value="$!{li.skuId}"/>
+
+                    $!{planReviewStateMap.get($!{li.reviewState}).getName()}</a>
+                </td>
+                <td>
+                        $!{promotionStateMap.get($!{li.promotionState}).getText()}</a>
+                </td>
+                <td>
+                    #if($!{planingInfo.operFlag}==1)
+                        <a class="exit_plan" href="javascript:void(0);">
+                            <input type="hidden" name="skuId_AClass_TD" value="$!{li.skuId}"/>
+                            <input type="hidden" name="promotionState_AClass_TD" value="$!{li.promotionState}"/>
+                            退出活动
+                        </a>
+                    #end
+
+                </td>
+            </tr>
+            #end
+        </tbody>
+    </table>
+</div>
+<!--列表结束-->
+
+<!--翻页开始-->
+<div class="style-red mt10">
+    <div class="page tr">
+        #set($pageUrl = "#springUrl('')/planInfoVenderManager/querySkuForSkuPage")
+        #pageTag($pageUrl, "", $!{page}, $!{params})
+    </div>
+</div>
+<!--翻页结束-->

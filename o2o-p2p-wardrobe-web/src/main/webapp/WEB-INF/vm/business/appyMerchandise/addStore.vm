@@ -1,0 +1,34 @@
+#set($layout = "layout/null.vm")
+<!--检索模块-->
+<div class="search">
+    <form action="/planingAppyMerchandise/searchStorePage" >
+        <table>
+            <tr>
+                <th>门店编号</th>
+                <td>
+                    <input name="stationNo" type="text"  value="" />
+                </td>
+                <th>商家门店编号</th>
+                <td>
+                    <input name="outSystemId" type="text"  value="" />
+                </td>
+                <th>门店名称</th>
+                <td>
+                    <input name="stationName" type="text"  value="" placeholder="支持模糊查询" />
+                </td>
+                <th class="opt-th"></th>
+                <td class="w140">
+                    <input id="addStoreQuery" class="button bg-green mr10 query" type="button" value="查 询">
+                    <input class="button bg-green" type="reset" value="清 空">
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+<!--列表-->
+<div class="table mt10 mb10"></div>
+<!--列表结束-->
+<div style="width: 100%;text-align: center;">
+    <input type="button" value="下一步" id="nextStep1" class="button bg-red mt30 mb20">
+</div>

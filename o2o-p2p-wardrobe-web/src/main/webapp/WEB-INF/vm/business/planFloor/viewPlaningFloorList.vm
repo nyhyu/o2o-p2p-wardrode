@@ -1,0 +1,82 @@
+#set($layout = "layout/null.vm")
+<!DOCTYPE html>
+<html>
+<head>
+    <title>活动楼层报名</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    #parse("/common/import.v2.0.vm")
+</head>
+<body>
+<div class="common-page style-blue" id="pageDetail">
+    <div class="mt20 mb15">
+        <a href="/planning/detailPage?planingId=$!{planingId}">$!{planingName}</a>
+    </div>
+    <div class="mb20">
+        报名楼层数据（上传商品数据），可以提交多次，但是每次提交后，<span class="red">最后一次提交的数据会覆盖之前的数据，请谨慎修改！</span>
+    </div>
+
+    <!--列表-->
+    <div class="table">
+        <table class="check-container" data-container="list">
+            <thead>
+            <tr>
+                <th>报名楼层</th>
+                <th>报名类型</th>
+                <th>布局</th>
+                <th>门店报品量</th>
+                <th>建议单个商品库存量</th>
+                <th>促销要求</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+
+            <tbody>
+             #foreach($list in $!viewPlaningFloorList)
+             <tr>
+                 <td>
+                     $!{list.floorName}
+                 </td>
+                 <td>
+                     #if(${list.floorType})
+                         $!{floorTypeMap.get($!{list.floorType}).getName()}
+                     #end
+                 </td>
+                 <td>
+                     #if(${list.cmsStyle})
+                         $!{cmsTypeEnumMap.get($!{list.cmsStyle}).getName()}
+                     #end
+                 </td>
+                 <td>
+                     50
+                 </td>
+                 <td>
+                     ${list.skuStoreCount}
+                 </td>
+                 <td>
+                     #if($!{list.promotionType})
+                         $!{promotionTypeMap.get($!{list.promotionType}).getName()}
+                     #end
+                     #if($!{list.promotionValue})
+                         :$!{promotionLevelMap.get($!{list.promotionValue}).getName()}
+                     #end
+                 </td>
+                 <td>
+##                     #if($privilegeTool.hasPermission('func_test'))
+                     #if($!{list.expireFlg}==1)
+                         <a href="/planingAppyMerchandise/addStoreIndex?promotionType=$!{list.promotionType}&promotionValue=$!{list.promotionValue}&planingCode=$!{list.planingCode}&floorCode=$!{list.floorCode}&floorGroupCode=1">上传/修改促销品</a>
+                     #end
+##                    #end
+                     #if($!{list.skuId}&&$!{list.expireFlg}==2)
+                         <a href="/planInfoVenderManager/querySkuForSkuIndex?planingCode=$!{list.planingCode}&floorCode=$!{list.floorCode}&floorGroupCode=1">查看报品</a>
+                     #elseif($!{list.skuId}&&$!{list.expireFlg}==1)
+                         </br><a href="/planInfoVenderManager/querySkuForSkuIndex?planingCode=$!{list.planingCode}&floorCode=$!{list.floorCode}&floorGroupCode=1">查看报品</a>
+                     #end
+                 </td>
+             </tr>
+             #end
+            </tbody>
+        </table>
+    </div>
+    <!--列表结束-->
+    </div>
+</body>

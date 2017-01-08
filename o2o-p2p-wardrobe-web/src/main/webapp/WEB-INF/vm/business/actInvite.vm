@@ -1,0 +1,102 @@
+#set($layout = "layout/null.vm")
+<!DOCTYPE html>
+<html>
+<head>
+    <title>活动邀请页</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    #parse("/common/import.v2.0.vm")
+    <script>seajs.use("js/business/merchReported/hasEnrolPlan");</script>
+    <script>seajs.use("js/business/merchReported/hasEnrol");</script>
+</head>
+<body>
+<div class="common-page" id="pageEnrol">
+    <div class="tabs" id="tab1" select="one" toggle="click">
+        <div class="tab-head">
+            <ul class="tab-nav">
+                <li class="active"><a href="#@">可报名的活动</a></li>
+                <li><a href="#@">已报名的活动<span class="red pl10 f14">$!{audittotal}</span></a></li>
+            </ul>
+        </div>
+        <div class="tab-body">
+            <div class="panel" id="one" tar-id="one" style="display:block;">
+                <!--检索模块-->
+                <div class="search">
+                    <form action="/planning/toRegisterPlanning">
+                        <table>
+                            <tr>
+                                <th>活动名称</th>
+                                <td>
+                                    <input name="orderSearchRemark" type="hidden" value="10">
+                                    <input name="planningName" type="text">
+                                    <input name="stationNo" style="display:none" type="text" readonly="true" value="">
+                                    <input type="hidden" id="venderCode" value="$!{venderCode}">
+                                </td>
+                                <th>活动时间</th>
+                                <td><input id="dealStartTime" type="text" name="planningBeginTime"
+                                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'dealEndTime\')}'})">
+                                </td>
+                                <th>至</th>
+                                <td><input id="dealEndTime" type="text" name="planningEndTime"
+                                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'dealStartTime\')}'})">
+                                </td>
+                                <th class="opt-th"></th>
+                                <td class="w140">
+                                    <input class="button bg-green mr10 query" type="button" value="查 询">
+                                    <input class="button bg-green" type="reset" value="清 空">
+                                </td>
+                            </tr>
+
+                        </table>
+                    </form>
+                </div>
+                <!--列表-->
+                <div class="picklist table f14 mt20"></div>
+                <!--列表结束-->
+            </div>
+            <div tar-id="two" class="panel" id="two">
+                <!--检索模块-->
+                <div class="search">
+                    <form action="/planInfoVenderManager/queryRegisPlanIndexPage" id="orderSearchForm">
+                        <table>
+                            <tr>
+                                <th>活动名称</th>
+                                <td>
+                                    <input name="planingName" type="text">
+                                </td>
+                                <th>活动时间</th>
+                                <td><input id="planingBeginTimeId" type="text" name="planingBeginTimeStr"
+                                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'planingEndTimeId\')}'})">
+                                </td>
+                                <th>至</th>
+                                <td><input id="planingEndTimeId" type="text" name="planingEndTimeStr"
+                                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'planingBeginTimeId\')}'})">
+                                </td>
+                                <th>活动状态</th>
+                                <td>
+                                    <select id="planingStateId" name="planingStateStr" class="w200">
+                                        <option value="">请选择</option>
+                                        #foreach($key in ${noPlaningStateMap.keySet()})
+                                            <option value="$!key">${noPlaningStateMap.get($key).getText()}</option>
+                                        #end
+                                    </select>
+                                </td>
+                                <th class="opt-th"></th>
+                                <td class="w140">
+                                    <input class="button bg-green mr10 query" type="button" value="查 询">
+                                    <input class="button bg-green" type="reset" value="清 空">
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <!--检索模块结束-->
+
+                <!--列表-->
+                <div class="table grid-default mt30"></div>
+                <!--列表结束-->
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

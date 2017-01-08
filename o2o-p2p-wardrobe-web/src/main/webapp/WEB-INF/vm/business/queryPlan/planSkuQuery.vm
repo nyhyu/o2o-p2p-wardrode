@@ -1,0 +1,88 @@
+#set($layout = "layout/null.vm")
+<!DOCTYPE html>
+<html>
+<head>
+    <title>查看报品</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    #parse("/common/import.v2.0.vm")
+    <script>seajs.use("js/business/merchReported/hasSkuList");</script>
+</head>
+<body>
+<div class="common-page" id="pageEnrol">
+    <div class="tabs" id="tab1" select="one" toggle="click">
+        <div class="tab-head">
+            <table>
+                <tr>
+                    <th>活动名称:</th>
+                    <td>
+                       &nbsp;&nbsp; $!{pageRequest.planingName}
+                    </td>
+                </tr>
+                <tr>
+                    <th>活动时间:</th>
+                    <td colspan="2">&nbsp;&nbsp;$!dateFormatUtils.format($!{pageRequest.planingBeginTime},"yyyy-MM-dd HH:mm:ss")
+                        ~
+                        $!dateFormatUtils.format($!{pageRequest.planingEndTime},"yyyy-MM-dd HH:mm:ss")</td>
+                </tr>
+                <tr>
+                    <th>活动楼层:</th>
+                    <td >
+                        &nbsp;&nbsp;$!{pageRequest.floorName}
+                    </td>
+                </tr>
+                <tr>
+                    <th>数据类型:</th>
+                    <td>
+                        &nbsp;&nbsp;$!{floorTypeMap.get($!{pageRequest.floorType}).getName()}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <!--检索模块-->
+            <div class="search" id="skuDiv">
+                <form action="/planInfoVenderManager/querySkuForSkuPage" id="orderSearchForm">
+                    <table>
+                        <input type="hidden" name="planingCode" value="$!{pageRequest.planingCode}" id="planingCodeTd">
+                        <input type="hidden" name="floorCode" value="$!{pageRequest.floorCode}" id="floorCodeTd">
+                        <input type="hidden" name="floorGroupCode" value="$!{pageRequest.floorGroupCode}"
+                               id="floorGroupCodeTd">
+                        <input type="hidden" name="venderCode" value="$!{pageRequest.venderCode}" id="venderCodeTd">
+                        <input type="hidden" value="$!{pageRequest.skuId}" id="skuIdTd">
+                        <tr>
+                            <th>审核状态</th>
+                            <td>
+                                <select id="planingStateId" name="reviewState" class="w200">
+                                    <option value="">请选择</option>
+                                    #foreach($key in ${planReviewStateMap.keySet()})
+                                        <option value="$!key">${planReviewStateMap.get($key).getName()}</option>
+                                    #end
+                                </select>
+                            </td>
+                            <th>促销状态</th>
+                            <td>
+                                <select id="planingStateId" name="promotionState" class="w200">
+                                    <option value="">请选择</option>
+                                    #foreach($key in ${promotionStateMap.keySet()})
+                                        <option value="$!key">${promotionStateMap.get($key).getText()}</option>
+                                    #end
+                                </select>
+                            </td>
+                            <th class="opt-th"></th>
+                            <td class="w140">
+                                <input class="button bg-green mr10 query" type="button" value="查 询">
+                                <input class="button bg-green" type="reset" value="清 空">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <!--检索模块结束-->
+
+            </div>
+            <!--列表-->
+            <div class="picklist table mt20"></div>
+            <!--列表结束-->
+        </div>
+    </div>
+</body>
+</html>

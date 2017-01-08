@@ -1,0 +1,43 @@
+#set($layout = "layout/null.vm")
+<!--检索模块-->
+<div class="search">
+    <form action="/planingAppyMerchandise/searchSkuPage?promotionType=$!{promotionType}&promotionValue=$!{promotionValue}" >
+        <table>
+            <tr>
+                <th>商品名称</th>
+                <td>
+                    <input name="skuName" type="text"  value="" placeholder="支持模糊查询" />
+                    <input id="stationCode" name="stationCode" type="hidden"  value="" readonly="true"  />
+                </td>
+                <th>商品编号</th>
+                <td>
+                    <input name="skuId" type="text"  value="" />
+                </td>
+                <th>商家商品编号</th>
+                <td>
+                    <input name="outSkuId" type="text"  value="" />
+                </td>
+                <th class="opt-th"></th>
+                <td class="w140">
+                    <input id="addCommodQuery" class="button bg-green mr10 query" type="button" value="查 询">
+                    <input class="button bg-green" type="reset" value="清 空">
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+#if($!{promotionType})
+<div class="tools mb10">
+    <label for="limitPin"><input type="checkbox" id="limitPin" name="limitPin">限到家账号</label>
+    <label class="ml10 " for="limitDevice"><input type="checkbox" id="limitDevice" name="limitDevice">限设备</label>
+    <span class="ml15 mr5">本次促销活动限购数量(0代表不限购)：</span><input type="text" value="" name="limitCount" class="validate" id="limitCount" data-validate="nonNegInt,required">
+</div>
+#end
+<!--列表-->
+<div class="table mt10 mb10"></div>
+<!--列表结束-->
+<div style="width: 100%;text-align: center;">
+    <input type="button" value="上一步" id="prevStep2" class="button bg mt30 mb20 mr10">
+    <input type="button" value="下一步" id="nextStep2" class="button bg-red mt30 mb20">
+</div>

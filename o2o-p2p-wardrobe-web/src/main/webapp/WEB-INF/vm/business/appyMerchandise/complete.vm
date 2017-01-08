@@ -1,0 +1,45 @@
+#set($layout = "layout/null.vm")
+    <!--列表-->
+<div class="table mt10 mb10">
+    <table class="check-container" data-container="list">
+        <thead>
+        <tr>
+            <th>门店信息 </th>
+            <th>商品编码</th>
+            <th>商品名称</th>
+            <th>到家价</th>
+        </tr>
+        </thead>
+
+        <tbody>
+##        #foreach($orderList in $!newOrderinfoMains)
+##            <tr>
+##                <td><a class="enrolAct" href="javascript:void(0);">2个</a></td>
+##                <td>10022832</td>
+##                <td>门头沟店</td>
+##                <td>122</td>
+##            </tr>
+##            <tr>
+##                <td><a class="enrolAct" href="javascript:void(0);">4个</a></td>
+##                <td>10022831</td>
+##                <td>平谷店</td>
+##                <td>22</td>
+##            </tr>
+##            <tr>
+##                <td><a class="enrolAct" href="javascript:void(0);">2个</a></td>
+##                <td>10022833</td>
+##                <td>良乡店</td>
+##                <td>12</td>
+##            </tr>
+##        #end
+        </tbody>
+    </table>
+    <!--列表结束-->
+</div>
+<!--翻页开始-->
+<div class="footer mt10"> </div>
+<!--翻页结束-->
+<div style="width: 100%;text-align: center;">
+    <input type="button" value="上一步" id="prevStep3" class="button bg mt30 mb20 mr10">
+    <input type="button" value="提交活动" id="nextStep3" class="button bg-red mt30 mb20">
+</div>

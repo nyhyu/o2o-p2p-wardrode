@@ -1,0 +1,110 @@
+#set($layout = "layout/null.vm")
+<!--批量操作-->
+##<div class="tool mt30 mb10">
+##    <label class="mr10 ml10"><input class="check-all" data-target="list" type="checkbox"> 全选</label>
+##    <input class="button bg-blue allback" type="button" value="批量确认退回">
+##</div>
+<!--批量操作结束-->
+    <!--列表-->
+    <table class="check-container">
+        <thead>
+        <tr>
+            <th><label class="mr10 ml10"><input class="check-all" data-target="list" type="checkbox"> 全选</label></th>
+            <th>商品名称</th>
+            <th>商品编码</th>
+            <th>商家商品编码</th>
+            <th>到家参考价</th>
+            #if($!{promotionType})
+                <th>折扣要求</th>
+                <th>抢购价（元）</th>
+                <th>抢购总数</th>
+            #end
+##            <th>备品设置</th>
+        </tr>
+        </thead>
+
+        <tbody data-container="list">
+        #foreach($list in $!skulist)
+            <tr>
+                <td><input type="checkbox" value="" name="orderId" class="check"></td>
+                <td>$!{list.skuName}</td>
+                <td>$!{list.skuId}</td>
+                <td>$!{list.outSkuId}</td>
+                <td>
+                #if($!{list.minBasicPrice}&&$!{list.maxBasicPrice}&&$!{list.minBasicPrice}!=$!{list.maxBasicPrice})
+                    <span>$!{list.minBasicPrice}</span>-$!{list.maxBasicPrice}
+                    #elseif(!$!{list.minBasicPrice})
+                        <span></span>
+                    #elseif($!{list.minBasicPrice}&&$!{list.maxBasicPrice}&&$!{list.minBasicPrice}==$!{list.maxBasicPrice})
+                    <span>$!{list.minBasicPrice}</span>
+                #end
+                </td>
+                #if($!{promotionType})
+                    <td>$!{promotionLevelMap.get($!{promotionValue}).getName()}</td>
+##                    <td><input type="text" value="" name="promotionPrice" class="validate promotionPriceTd" data-validate="required,isSizeOf,notNegReal,twoDecimal"  v_minlength="0"
+                    <td><input type="text" value="" name="promotionPrice" class="validate promotionPriceTd" data-validate="isSizeOf,notNegReal,twoDecimal"  v_minlength="0"
+
+                        #if($!{list.minPrice}!=""))
+                         v_maxlength="$!{list.minPrice}" placeholder="金额不得大于$!{list.minPrice}"
+                        #else
+                        v_maxlength="0"
+                        #end
+                        v_flag="qT"></td>
+##                    <td><input type="text" value="" name="size" class="validate promotionTd" data-validate="posInt,required"></td>
+                    <td><input type="text" value="" name="size" class="validate promotionTd" data-validate="posInt"></td>
+                #end
+##                <td>
+##                    <label><input name="commodity-$!{list.skuId}" type="radio" value="1" checked="checked" class="mainSku" />添为主商品</label>
+##                    <label><input name="commodity-$!{list.skuId}" type="radio" value="2" class="mainSku" />添为备商品</label>
+##                </td>
+            </tr>
+        #end
+        </tbody>
+    </table>
+    <!--列表结束-->
+
+    <!--翻页开始-->
+    <div class="page tr mt10">
+        #set($pageUrl = "#springUrl('')/planingAppyMerchandise/searchSkuPage")
+        #pageTag($pageUrl, "",$page, $params)
+    </div>
+    <!--翻页结束-->
+<script>
+    seajs.use('jquery',function($){
+        $(function(){
+            //返填
+            var rows = $("#creatStep_2 .table tbody tr");
+            rows.each(function(){
+                var staCode= $(this).find("td").eq(2).text();
+                var trXb=$.inArray(staCode,skuIdArr);
+                if(skuIdArr.length>0 && trXb>=0){
+                    $(this).find("td input[type=checkbox]").attr("checked", true);
+                    var isPromotions=$("#promotionType").val();
+                    if(isPromotions.length>0){//促销
+                        $(this).find("td").eq(6).find("input").val(promotionPriceArr[trXb]);
+                        $(this).find("td").eq(7).find("input").val(promotionSizeArr[trXb]);
+//                        if(isMainSkuArr[trXb]==1){
+//                            $(this).find("td").eq(8).find("input").eq(1).removeAttr("checked");
+//                            $(this).find("td").eq(8).find("input").eq(0).attr("checked", true);
+//                        }else{
+//                            $(this).find("td").eq(8).find("input").eq(0).removeAttr("checked");
+//                            $(this).find("td").eq(8).find("input").eq(1).attr("checked", true);
+//                        }
+                    }else{
+                        promotionPriceArr.push(-1); //促销价
+                        promotionSizeArr.push(-1); //促销数量
+//                        if(isMainSkuArr[trXb]==1){
+//                            $(this).find("td").eq(8).find("input").eq(1).removeAttr("checked");
+//                            $(this).find("td").eq(6).find("input").eq(0).attr("checked", true);
+//                        }else{
+//                            $(this).find("td").eq(8).find("input").eq(0).removeAttr("checked");
+//                            $(this).find("td").eq(6).find("input").eq(1).attr("checked", true);
+//                        }
+                    }
+
+
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,54 @@
+#set($layout = "layout/null.vm")
+
+<!--列表-->
+<div class="table grid-default mt30">
+    <table class="check-container" data-container="list">
+        <thead>
+        <tr>
+            <th>活动名称</th>
+            <th>活动时间</th>
+            <th>活动状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            #foreach($li in $!{planList})
+            <tr>
+                <td>
+                    <a class="detailPlanA" data-id="$!{li.planingId}" data-code="$!{li.planingCode}"
+                       data-name="$!{li.planingName}" href="javascript:void(0);">
+                        <input type="hidden" class="planingIdA" value="$!{li.planingId}"/>
+                        <input type="hidden" class="planingCodeA" value="$!{li.planingCode}"/>
+                        <input type="hidden" class="planingNameA" value="$!{li.planingName}"/>
+                        <input type="hidden" class="floorCodeA" value="$!{li.floorCode}"/>
+
+                        $!{li.planingName}</a>
+                </td>
+                <td>$!dateFormatUtils.format($!{li.planingBeginTime},"yyyy-MM-dd HH:mm:ss")
+                    ~ $!dateFormatUtils.format($!{li.planingEndTime},"yyyy-MM-dd HH:mm:ss")</td>
+                <td>$!{planingStateMap.get($!li.planingState).getText()}</td>
+                <td>
+                    <a class="seeDataA" data-id="$!{li.planingId}" data-code="$!{li.planingCode}"
+                       data-name="$!{li.planingName}" href="javascript:void(0);">
+                        <input type="hidden" class="planingIdA" value="$!{li.planingId}"/>
+                        <input type="hidden" class="planingCodeA" value="$!{li.planingCode}"/>
+                        <input type="hidden" class="planingNameA" value="$!{li.planingName}"/>
+                        <input type="hidden" class="floorCodeA" value="$!{li.floorCode}"/>
+                        查看活动数据</a>
+                </td>
+            </tr>
+            #end
+        </tbody>
+    </table>
+</div>
+<!--列表结束-->
+
+<!--翻页开始-->
+<div class="style-red mt10">
+    <div class="page tr">
+        #set($pageUrl = "#springUrl('')/planInfoVenderManager/queryRegisPlanIndexPage")
+        #pageTag($pageUrl, "", $!{page}, $!{params})
+    </div>
+</div>
+<!--翻页结束-->

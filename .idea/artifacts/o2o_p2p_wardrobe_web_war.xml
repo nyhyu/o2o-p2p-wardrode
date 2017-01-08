@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="o2o-p2p-wardrobe-web:war">
+    <output-path>$PROJECT_DIR$/o2o-p2p-wardrobe-web/target</output-path>
+    <root id="archive" name="o2o-p2p-wardrobe-web-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="o2o-p2p-wardrobe-web:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,52 @@
+#set($layout = "layout/null.vm")
+<!DOCTYPE html>
+<html>
+<head>
+    <title>查询门店</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    #parse("/common/import.v2.0.vm")
+</head>
+<body>
+<div id="storeInfo" class="db common-page">
+    <!--列表-->
+    <div class="table mt10 mb10">
+    <table class="check-container" data-container="list">
+        <thead>
+        <tr>
+            <th>门店编码 </th>
+            <th>门店名称</th>
+        </tr>
+        </thead>
+
+        <tbody>
+##        #foreach($orderList in $!newOrderinfoMains)
+##            <tr>
+##                <td>10022832</td>
+##                <td>门头沟店</td>
+##            </tr>
+##            <tr>
+##                <td>10022831</td>
+##                <td>平谷店</td>
+##            </tr>
+##            <tr>
+##                <td>10022833</td>
+##                <td>良乡店</td>
+##            </tr>
+##        #end
+        #foreach($list in $!stationInfoList)
+        <tr>
+            <td>$!{list.stationCode}</td>
+            <td>$!{list.stationName}</td>
+        </tr>
+        #end
+        </tbody>
+    </table>
+    <!--列表结束-->
+</div>
+    <!--翻页开始-->
+    <div class="footer mt10"> </div>
+    <!--翻页结束-->
+</div>
+##<script>seajs.use(['/static/js/business/merchReported/quoteStoreInfo.js']);</script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+     <Properties>  
+         <Property name="var.log.level">${mvn.log.level}</Property>  
+         <Property name="var.log.path.dir">${mvn.log.path}/o2o.platform.promotion.planning.apply.web.jd.local</Property>
+         <Property name="var.output.pattern">[%-5p %d{yyyy-MM-dd HH:mm:ss.SSS}] [%t] [%l] %m%n</Property>  
+     </Properties>
+	<Appenders>
+		<Console name="stdout" target="SYSTEM_OUT">
+			<PatternLayout pattern="${var.output.pattern}" />
+		</Console>
+		<RollingRandomAccessFile bufferSize="1024" name="framework-output"  fileName="${var.log.path.dir}/framework-output.log" filePattern="${var.log.path.dir}/framework-output.log.%i">
+			<PatternLayout>
+				<Pattern>${var.output.pattern}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="5" />
+		</RollingRandomAccessFile>
+		<RollingRandomAccessFile bufferSize="1024" name="jd-output" fileName="${var.log.path.dir}/jd-output.log" filePattern="${var.log.path.dir}/jd-output.log.%i">
+			<PatternLayout>
+				<Pattern>${var.output.pattern}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="100MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="5" />
+		</RollingRandomAccessFile>
+		<RollingRandomAccessFile bufferSize="1024" name="o2o-api-monitor" fileName="${var.log.path.dir}/o2o-api-monitor.log" filePattern="${var.log.path.dir}/o2o-api-monitor.log.%i">
+			<PatternLayout>
+				<Pattern>[%-5p %d{yyyy-MM-dd HH:mm:ss.SSS}] %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="500MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="4" />
+		</RollingRandomAccessFile>
+		<RollingRandomAccessFile bufferSize="1024" name="o2o-local-cache" fileName="${var.log.path.dir}/o2o-local-cache.log" filePattern="${var.log.path.dir}/o2o-local-cache.log.%i">
+			<PatternLayout>
+				<Pattern>${var.output.pattern}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="500MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="4" />
+		</RollingRandomAccessFile>
+		<RollingRandomAccessFile bufferSize="1024" name="proj-output" fileName="${var.log.path.dir}/proj-output.log" filePattern="${var.log.path.dir}/proj-output.log.%i">
+			<PatternLayout>
+				<Pattern>${var.output.pattern}</Pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="500MB" />
+			</Policies>
+			<DefaultRolloverStrategy max="4" />
+		</RollingRandomAccessFile>
+	</Appenders>
+	<Loggers>
+		<AsyncRoot level="debug" includeLocation="true">
+			<AppenderRef ref="stdout" />
+		</AsyncRoot>
+	    <!-- log4spring -->
+	    <AsyncLogger name="org.springframework" level="ERROR" includeLocation="true" additivity="false">
+			<AppenderRef ref="framework-output" />
+		</AsyncLogger>
+		<!-- log4jdbc -->
+	    <AsyncLogger name="jdbc.sqltiming" level="INFO" includeLocation="true" additivity="false">
+			<AppenderRef ref="framework-output" />
+		</AsyncLogger>
+		<!-- log4HibernateValidator -->
+	    <AsyncLogger name="org.apache.commons.validator.ValidatorResources" level="ERROR" includeLocation="true" additivity="false">
+			<AppenderRef ref="framework-output" />
+		</AsyncLogger>
+		<!-- zookeeper -->
+	    <AsyncLogger name="org.apache.zookeeper" level="WARN" includeLocation="true" additivity="false">
+			<AppenderRef ref="framework-output" />
+		</AsyncLogger>
+		<!-- apache activemq -->
+	    <AsyncLogger name="org.apache.activemq" level="WARN" includeLocation="true" additivity="false">
+			<AppenderRef ref="framework-output" />
+		</AsyncLogger>
+		<!-- jd or commons loggers begin -->
+	    <AsyncLogger name="com.jd.ump" level="ERROR" includeLocation="true" additivity="false">
+			<AppenderRef ref="jd-output" />
+		</AsyncLogger>
+	    <AsyncLogger name="com.jd.bk.saf" level="ERROR" includeLocation="true" additivity="false">
+			<AppenderRef ref="jd-output" />
+		</AsyncLogger>
+	    <AsyncLogger name="com.jd.activemq" level="ERROR" includeLocation="true" additivity="false">
+			<AppenderRef ref="jd-output" />
+		</AsyncLogger>
+	    <AsyncLogger name="com.jd.cachecloud" level="ERROR" includeLocation="true" additivity="false">
+			<AppenderRef ref="jd-output" />
+		</AsyncLogger>
+	    <AsyncLogger name="com.jd.o2o.commons.cache" level="ERROR" includeLocation="true" additivity="false">
+			<AppenderRef ref="jd-output" />
+		</AsyncLogger>
+	    <AsyncLogger name="com.jd.service" level="ERROR" includeLocation="true" additivity="false">
+			<AppenderRef ref="jd-output" />
+		</AsyncLogger>
+	    <AsyncLogger name="com.jd.jsf" level="ERROR" includeLocation="true" additivity="false">
+			<AppenderRef ref="jd-output" />
+		</AsyncLogger>
+		<AsyncLogger name="com.jd.o2o.commons.monitor.ApiMonitorProcess" level="${var.log.level}" includeLocation="true" additivity="true">
+			<AppenderRef ref="o2o-api-monitor" />
+		</AsyncLogger>
+		<AsyncLogger name="com.jd.o2o.commons.localcache" level="${var.log.level}" includeLocation="true" additivity="true">
+			<AppenderRef ref="o2o-local-cache" />
+		</AsyncLogger>
+		<!-- jd or commons loggers end -->
+		<!-- project loggers begin -->
+		<AsyncLogger name="com.jd.o2o.promotion.planning.web" level="${var.log.level}" includeLocation="true" additivity="true">
+			<AppenderRef ref="proj-output" />
+		</AsyncLogger>
+		<!-- project loggers end -->
+	</Loggers>
+</Configuration>

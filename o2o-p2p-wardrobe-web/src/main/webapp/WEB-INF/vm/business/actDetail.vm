@@ -1,0 +1,89 @@
+#set($layout = "layout/null.vm")
+<!DOCTYPE html>
+<html>
+<head>
+    <title>活动详情</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    #parse("/common/import.v2.0.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('')/static/style/business/commodityQuote/actDetail.css"/>
+    <script>seajs.use("js/business/merchReported/actDetail")</script>
+
+</head>
+
+<body>
+<!--titlebar start-->
+##<div class="titlebar">
+##    <h3 class="hw">活动邀请-活动详情</h3>
+##</div>
+<!--titlebar end-->
+
+<div class="common-page style-blue" id="pageDetail">
+    <!--活动描述-->
+    <div class="o-block">
+        <div class="o-title">
+            活动描述
+        </div>
+        <div class="o-cont">
+            <ul>
+                <li>活动名称：$!{planingInfoResponse.planingName}</li>
+                <li>报名截止时间：$!dateFormatUtils.format($!{planingInfoResponse.involvementEndTime},"yyyy-MM-dd HH:mm:ss")</li>
+                <li>活动时间：$!dateFormatUtils.format($!{planingInfoResponse.planingBeginTime},"yyyy-MM-dd HH:mm:ss")~$!dateFormatUtils.format($!{planingInfoResponse.planingEndTime},"yyyy-MM-dd HH:mm:ss")</li>
+                <li>活动城市：$!{planingInfoResponse.planingCityName}</li>
+                <li>建议活动商品库存量：$!{planingInfoResponse.skuStoreCount}</li>
+                #if($!{planingInfoResponse.planingPhoto}!="")
+                <li><div class="divTitle">活动页效果图：</div>
+                    <div class="grey-box p-img">
+                        <img src="$!{planingInfoResponse.planingPhoto}" width="120px;" height="120px;" />
+                    </div>
+                    <div class="enlarge" style="display: none;">
+                        <i></i>
+                        <div>
+                            <img class="pic" src="$!{planingInfoResponse.planingPhoto}">
+                        </div>
+                    </div>
+                </li>
+                #end
+                <li><strong>活动描述：</strong></li>
+                <li>
+                    <dl>
+                        <dd>$!{planingInfoResponse.description}</dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="tc">
+    <input type="button" class="button bg-green mb30" value="返回上一步" onclick="window.history.back();"/>
+</div>
+</body>
+<script type="text/javascript">
+
+
+//    function sellerDiscountDetail(){
+//        var json = {};
+//        json.orderId = $(".orderId").attr("value");
+//        json.orderSource = $(".orderSource").attr("value");
+//        json.venderId = $(".venderId").attr("value");
+//        json.sellerDiscount = $(".sellerDiscount").attr("value");
+//
+//        $.ajax({
+//            type: 'POST',
+//            url: '/order/export/discountMoneyDetails',
+//            data: json,
+//            success: function (result) {
+//                    if ($("#dicountMoneyDetails")[0].style.display == "none"){
+//                        $("#dicountMoneyDetails").show();
+//                        $("#showMoney").attr("value","隐藏明细");
+//                        $("#goodsDiscount").text("商品优惠：" + result.goodsDiscountMoney)
+//                        $("#freightDiscount").text("运费优惠：" + result.freightDiscountMoney)
+//                    } else {
+//                        $("#dicountMoneyDetails").hide();
+//                        $("#showMoney").attr("value","显示明细");
+//                    }
+//            }
+//        });
+//
+//    }
+</script>
+</html>

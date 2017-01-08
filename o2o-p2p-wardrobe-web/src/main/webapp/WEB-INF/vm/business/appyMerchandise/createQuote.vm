@@ -1,0 +1,46 @@
+#set($layout = "layout/null.vm")
+<!DOCTYPE html>
+<html>
+<head>
+    <title>活动详情</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    #parse("/common/import.v2.0.vm")
+</head>
+<body>
+<div id="dashboard" class="db common-page">
+    <div style="border:#e6e6e6 1px solid; background-color:#fff" class="p20 m10 pt30">
+      <!--添加门店页面 -->
+        <input type="hidden" readonly="true" name="planingCode" value="$!{planingCode}" id="planingCode">
+        <input type="hidden" readonly="true"  name="floorCode" value="$!{floorCode}" id="floorCode">
+        <input type="hidden" readonly="true"  name="floorGroupCode" value="$!{floorGroupCode}" id="floorGroupCode">
+        <input type="hidden" readonly="true"  name="promotionType" value="$!{promotionType}" id="promotionType">
+        <input type="hidden" readonly="true"  name="promotionValue" value="$!{promotionValue}" id="promotionValue">
+        <input type="hidden" readonly="true"  name="limitTypePin" value="$!{limitTypePin}" id="limitTypePin">
+        <input type="hidden" readonly="true"  name="limitTypeDevice" value="$!{limitTypeDevice}" id="limitTypeDevice">
+        <input type="hidden" readonly="true"  name="limitSize" value="$!{limitSize}" id="limitSize">
+      <div id="creatStep_1">#parse("/business/appyMerchandise/addStore.vm")</div>
+      <!--添加门店页面结束 -->
+
+      <!--添加商品页面 -->
+      <div id="creatStep_2" style="display: none;">#parse("/business/appyMerchandise/addCommodities.vm")</div>
+      <!--添加商品页面结束 -->
+
+      <!--确认提交页面 -->
+      <div id="creatStep_3" style="display: none;">#parse("/business/appyMerchandise/complete.vm")</div>
+      <!--确认提交页面结束 -->
+
+    </div>
+</div>
+<script>
+    var stationCodeArr = []; //门店编号
+    var stationNameArr = [];//门店名称
+    var skuIdArr = []; //商品编号
+    var skuNameArr = [];//商品名称
+    var stationPriceArr = [];//门店价
+    var promotionPriceArr = []; //促销价
+    var promotionSizeArr = []; //促销数量
+    var isMainSkuArr = []; //主备品 --1:主商品 2：备品
+    seajs.use(['/static/js/business/merchReported/complete.js']);
+</script>
+</body>
+</html>

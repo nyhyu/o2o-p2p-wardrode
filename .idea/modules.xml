@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/o2o-p2p-wardrobe.iml" filepath="$PROJECT_DIR$/o2o-p2p-wardrobe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/o2o-p2p-wardrobe-api/o2o-p2p-wardrobe-api (1) (o2o.p2p.wardrobe.api).iml" filepath="$PROJECT_DIR$/o2o-p2p-wardrobe-api/o2o-p2p-wardrobe-api (1) (o2o.p2p.wardrobe.api).iml" />
+      <module fileurl="file://$PROJECT_DIR$/o2o-p2p-wardrobe-api/o2o-p2p-wardrobe-api (1) (o2o.p2p.wardrobe.api).iml" filepath="$PROJECT_DIR$/o2o-p2p-wardrobe-api/o2o-p2p-wardrobe-api (1) (o2o.p2p.wardrobe.api).iml" />
+      <module fileurl="file://$PROJECT_DIR$/o2o-p2p-wardrobe-dao/o2o-p2p-wardrobe-api (2) (o2o.p2p.wardrobe.dao).iml" filepath="$PROJECT_DIR$/o2o-p2p-wardrobe-dao/o2o-p2p-wardrobe-api (2) (o2o.p2p.wardrobe.dao).iml" />
+      <module fileurl="file://$PROJECT_DIR$/o2o-p2p-wardrobe-dao/o2o-p2p-wardrobe-api (2) (o2o.p2p.wardrobe.dao).iml" filepath="$PROJECT_DIR$/o2o-p2p-wardrobe-dao/o2o-p2p-wardrobe-api (2) (o2o.p2p.wardrobe.dao).iml" />
+      <module fileurl="file://$PROJECT_DIR$/o2o-p2p-wardrobe-domain/o2o-p2p-wardrobe-domain.iml" filepath="$PROJECT_DIR$/o2o-p2p-wardrobe-domain/o2o-p2p-wardrobe-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/o2o-p2p-wardrobe-service/o2o-p2p-wardrobe-service.iml" filepath="$PROJECT_DIR$/o2o-p2p-wardrobe-service/o2o-p2p-wardrobe-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/o2o-p2p-wardrobe-web/o2o-p2p-wardrobe-web.iml" filepath="$PROJECT_DIR$/o2o-p2p-wardrobe-web/o2o-p2p-wardrobe-web.iml" />
+    </modules>
+  </component>
+</project>
